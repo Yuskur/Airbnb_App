@@ -1,4 +1,4 @@
-import { View, Text, Button } from 'react-native'
+import { View, Text, Button, TouchableOpacity, StyleSheet } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 
@@ -10,9 +10,29 @@ export default function Profile(){
     };
 
     return(
-        <View>
-            <Text>Profile</Text>
-            <Button title='Login' onPress={toLogin} />
+        <View style={styles.container}>
+            <TouchableOpacity onPress={toLogin}>
+                <Text style={styles.loginText}>Log In</Text>
+            </TouchableOpacity>
+            {/* <Button title='Login' onPress={toLogin} /> */}
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    },
+    centerContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    loginText: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginTop: 40
+    },
+
+})

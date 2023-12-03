@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -20,7 +20,7 @@ export default function Navigation(){
           <Stack.Navigator>
             <Stack.Screen name="Tabs" component={MyTabs} 
             options={{headerShown: false}} />
-            <Stack.Screen name="LoginScreen" component={LoginScreen} />
+            <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: true}} />
           </Stack.Navigator>
         );
       }
@@ -37,3 +37,10 @@ export default function Navigation(){
       }
     return <NavigationContainer><MyStack /></NavigationContainer>
 }
+
+const styles = StyleSheet.create({
+  tabText: {
+    fontSize: 24,
+    fontWeight: '600'
+  }
+})
