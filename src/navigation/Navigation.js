@@ -24,7 +24,8 @@ export default function Navigation(){
             options={{headerShown: false}} />
             <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: true}} />
             <Stack.Screen name="Resort" component={Resort} options={{ headerShown: true}} />
-            <Stack.Screen name="PasswordScreen" component={PasswordScreen} options={{ headerShown: false}}/>
+            <Stack.Screen name="PasswordScreen" component={PasswordScreen} options={{ headerShown: true}}/>
+            <Stack.Screen name="Profile" component={Profile} options={{ headerShown: true}} />
           </Stack.Navigator>
         );
       }

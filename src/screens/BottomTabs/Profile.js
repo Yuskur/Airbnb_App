@@ -2,7 +2,7 @@ import { View, Text, Button, TouchableOpacity, StyleSheet, TextInput, Image } fr
 import React, { useState, useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { FIREBASE_AUTH, FIREBASE_DB } from '../../../firebaseConfig';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 
 function Authentication(){
@@ -24,6 +24,8 @@ function Authentication(){
         setEdit(false)
     }
 
+
+
     useEffect(() => {
         const auth = FIREBASE_AUTH;
 
@@ -34,7 +36,14 @@ function Authentication(){
                 setEmail("email")
                 setDate("since")
             } else{
-                setName(user.displayName);
+                const document = doc(FIREBASE_DB, "users", user.uid);
+                const docSnapshot = async () =>{
+                    const snapshot = await getDoc(document);
+                    
+                    if(snapshot.exists){
+                        setName(snapshot.displayName)
+                    }
+                }
                 setEmail(user.email);
                 setDate(user.metadata.creationTime);
             }
@@ -112,13 +121,13 @@ function Authentication(){
                             <Text style={{
                                 alignSelf: 'center',
                                 textDecorationLine: 'underline'
-                            }}>email
+                            }}>{email}
                             </Text>
                             <Text style={{
                                 alignSelf: 'center',
                                 marginTop: 10,
                                 fontWeight: 'bold'
-                            }}>since </Text>
+                            }}>{startDate}</Text>
                         </View>
                     </View>
                 </>

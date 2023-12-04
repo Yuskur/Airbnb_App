@@ -1,8 +1,9 @@
 import { View, Text, KeyboardAvoidingView, ActivityIndicator, TouchableOpacity, StyleSheet, TextInput } from 'react-native'
 import React, { useState } from 'react'
-import { FIREBASE_AUTH } from '../../../firebaseConfig';
+import { FIREBASE_AUTH, FIREBASE_DB } from '../../../firebaseConfig';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
+import { addDoc, collection, doc } from 'firebase/firestore';
 
 
 function PasswordEnter({ email }){
@@ -11,13 +12,15 @@ function PasswordEnter({ email }){
     const auth = FIREBASE_AUTH;
     const navigation = useNavigation();
 
+    console.log(email);
+
     const signIn = async () => {
         if(password != ""){
             setLoading(true);
             try{
                 const response = await signInWithEmailAndPassword(auth, email, password);
                 console.log(response);
-
+                
                 navigation.navigate('Tabs');
 
             } catch (error){
@@ -34,10 +37,21 @@ function PasswordEnter({ email }){
             setLoading(true);
             try{
                 const response = await createUserWithEmailAndPassword(auth, email, password);
+                const user = response.user;
+                const addUser = await addDoc(collection(FIREBASE_DB, "users", user.uid), {
+                    userName: user.displayName, 
+                    imagePath: "",
+                    title: "",
+                    type: "",
+                    ratings: "",
+                    price: "",
+                });
+                console.log(addUser);
                 signIn();
             } catch(error){
                 console.error(error);
                 alert("Sign Up failed: " + error.message);
+                setLoading(false);
             }
         }
     }
@@ -90,9 +104,11 @@ function PasswordEnter({ email }){
 export default function PasswordScreen({ route }){
 
     const { email } = route.params
+    
+    const userEmail = email.substring((email.indexOf(":") + 1), email.length);
 
     return(
-        <PasswordEnter />
+        <PasswordEnter email={userEmail}/>
     )
 }
 
