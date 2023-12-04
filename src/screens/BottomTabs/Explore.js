@@ -4,7 +4,10 @@ import { useNavigation } from '@react-navigation/native';
 
 function SearchBar(){
     return(
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <View style={{
+            flexDirection: 'row', 
+            justifyContent: 'space-between',
+            marginBottom: 20}}>
             <View style={styles.searchBarContainer}>
                 <Image 
                     source={require('../../../assets/searchIcon.png')}
@@ -18,7 +21,7 @@ function SearchBar(){
                 </View>
                 <View style={styles.circle}>
                     {/* Add some kind of image here: */}
-
+                    
                 </View>
         </View>
     );
@@ -49,7 +52,9 @@ function Resort({imagePath, title, type, ratings, price}){
         <Image />
         </TouchableOpacity>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-            <Text style={styles.resortText}>{title}</Text>
+            <TouchableOpacity onPress={imageClick}>
+                <Text style={styles.resortText}>{title}</Text>
+            </TouchableOpacity>
             <Text style={styles.resortText}>{ratings}</Text>
         </View>
         <Text>{type}</Text>
@@ -71,15 +76,15 @@ export default function Explore(){
             title="Resort with big terrace & private bath"
             type="Private room"
             ratings="4.5"
-            price="$45" />
+            price="$150" />
             <Resort 
             imagePath={require('../../../assets/resort2.jpeg')}
             title="Resort with big terrace & private bath"
             type="Private room"
             ratings="4.5"
-            price="$45" />
+            price="$550" />
             </ScrollView>
-            <View style={{
+            <TouchableOpacity style={{
                 position: 'absolute', 
                 alignItems: 'center',
                 bottom: 50,
@@ -100,7 +105,7 @@ export default function Explore(){
                         style={styles.searchBarImage}
                     />
                 </View>
-            </View>
+            </TouchableOpacity>
         </View>
     )
 }
@@ -122,7 +127,8 @@ const styles = StyleSheet.create({
         marginLeft: 10,
     },
     resortContainer: {
-        marginTop: 30
+        marginTop: 30,
+        marginBottom: 20
     },  
     resortImage: {
         width: '100%',

@@ -1,13 +1,20 @@
 import { View, Text, KeyboardAvoidingView, TextInput, StyleSheet, ActivityIndicator, Button, TouchableOpacity } from 'react-native'
 import React, {useState} from 'react'
-// import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
 
 
 function Login(){
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [loading, setLoading] = useState(false);
+    const navigation = useNavigation();
+
+    function continueTo(){
+        if(email != ""){
+            navigation.navigate('PasswordScreen', {
+                email
+            });
+        }
+    };
 
     //handle continue pressed 
 
@@ -22,7 +29,7 @@ function Login(){
                     onChangeText={(text) => setEmail(text)}
                 />
             </View>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity onPress={continueTo} style={styles.button}>
                 <Text style={styles.buttonText}>Continue</Text>
             </TouchableOpacity>
             </KeyboardAvoidingView>

@@ -10,6 +10,7 @@ import Wishlists from '../screens/BottomTabs/Wishlists';
 import Inbox from '../screens/BottomTabs/Inbox';
 import LoginScreen from '../screens/Stacks/LoginScreen';
 import Resort from '../screens/Stacks/Resort';
+import PasswordScreen from '../screens/Stacks/PasswordScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -22,14 +23,14 @@ export default function Navigation(){
             <Stack.Screen name="Tabs" component={MyTabs} 
             options={{headerShown: false}} />
             <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: true}} />
-            <Stack.Screen name="Resort" component={Resort} options={{ headerShown: false}} />
-            <Stack.Screen name="Explore" component={Explore} />
+            <Stack.Screen name="Resort" component={Resort} options={{ headerShown: true}} />
+            <Stack.Screen name="PasswordScreen" component={PasswordScreen} options={{ headerShown: false}}/>
           </Stack.Navigator>
         );
       }
       function MyTabs(){
         return (
-          <Tab.Navigator>
+          <Tab.Navigator initialRouteName='Profile'>
           <Tab.Screen name="Explore" component={Explore} />
           <Tab.Screen name="Wishlists" component={Wishlists} />
           <Tab.Screen name="Trips" component={Trips} />

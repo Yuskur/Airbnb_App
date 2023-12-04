@@ -1,9 +1,10 @@
 import { View, Text, Button, TouchableOpacity, StyleSheet } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
+import { FIREBASE_AUTH, FIREBASE_DB } from '../../../firebaseConfig';
+import { addDoc, collection } from 'firebase/firestore';
 
 export default function Profile(){
-    const navigation = useNavigation();
 
     const toLogin = () => {
         navigation.navigate('LoginScreen');
