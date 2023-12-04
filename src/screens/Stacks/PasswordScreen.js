@@ -18,12 +18,8 @@ function PasswordEnter({ email }){
                 const response = await signInWithEmailAndPassword(auth, email, password);
                 console.log(response);
 
-                const displayName = response.displayName;
-                const uid = response.uid;
-                navigation.navigate('Tabs', {
-                    displayName, uid
-                });
-                
+                navigation.navigate('Tabs');
+
             } catch (error){
                 console.error(error);
                 alert("Sign In failed: " + error.message);
