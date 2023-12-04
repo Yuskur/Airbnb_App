@@ -1,5 +1,6 @@
-import { View, Text, StyleSheet, Image, TextInput, KeyboardAvoidingView, ScrollView} from 'react-native'
+import { View, Text, StyleSheet, Image, TextInput, KeyboardAvoidingView, ScrollView, TouchableOpacity} from 'react-native'
 import React from 'react'
+import { useNavigation } from '@react-navigation/native';
 
 function SearchBar(){
     return(
@@ -24,13 +25,29 @@ function SearchBar(){
 }
 
 function Resort({imagePath, title, type, ratings, price}){
+
+    const navigation = useNavigation();
+
+    function imageClick(){
+        navigation.navigate('Resort', {
+            imagePath,
+            title,
+            type,
+            ratings,
+            price,
+        });
+    };
+
+
     return( 
         <View style={styles.resortContainer}>
-        <Image 
-            source={imagePath}
-            style={styles.resortImage}
-        />
+        <TouchableOpacity onPress={imageClick}>
+            <Image 
+                source={imagePath}
+                style={styles.resortImage}
+            />
         <Image />
+        </TouchableOpacity>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <Text style={styles.resortText}>{title}</Text>
             <Text style={styles.resortText}>{ratings}</Text>
@@ -46,7 +63,8 @@ function Resort({imagePath, title, type, ratings, price}){
 
 export default function Explore(){
     return(
-        <ScrollView style={styles.container}>
+        <View>
+            <ScrollView style={styles.container}>
             <SearchBar />
             <Resort 
             imagePath={require('../../../assets/resort1.jpeg')}
@@ -60,10 +78,30 @@ export default function Explore(){
             type="Private room"
             ratings="4.5"
             price="$45" />
-            <View style={{flexDirection: 'row'}}>
-
+            </ScrollView>
+            <View style={{
+                position: 'absolute', 
+                alignItems: 'center',
+                bottom: 50,
+                width: '100%',
+                borderRadius: 100,
+                height: 60,
+                }}>
+                <View style={{
+                    flexDirection: 'row', 
+                    backgroundColor: 'grey',
+                    borderRadius: 60,
+                    padding: 15,
+                    alignItems: 'center'
+                    }}>
+                    <Text style={{fontWeight: 'bold', color: '#FFF'}}>Maps</Text>
+                    <Image 
+                        source={require('../../../assets/mapIcon.png')}
+                        style={styles.searchBarImage}
+                    />
+                </View>
             </View>
-        </ScrollView>
+        </View>
     )
 }
 
@@ -108,6 +146,7 @@ const styles = StyleSheet.create({
         flex: 1,
         height: '100%',
         marginLeft: 10,
+        marginRight: 20
     },
     resortText: {
         marginTop: 10,

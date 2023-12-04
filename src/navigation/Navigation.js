@@ -9,6 +9,7 @@ import Explore from '../screens/BottomTabs/Explore';
 import Wishlists from '../screens/BottomTabs/Wishlists';
 import Inbox from '../screens/BottomTabs/Inbox';
 import LoginScreen from '../screens/Stacks/LoginScreen';
+import Resort from '../screens/Stacks/Resort';
 
 
 const Stack = createNativeStackNavigator();
@@ -21,6 +22,8 @@ export default function Navigation(){
             <Stack.Screen name="Tabs" component={MyTabs} 
             options={{headerShown: false}} />
             <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: true}} />
+            <Stack.Screen name="Resort" component={Resort} options={{ headerShown: false}} />
+            <Stack.Screen name="Explore" component={Explore} />
           </Stack.Navigator>
         );
       }
