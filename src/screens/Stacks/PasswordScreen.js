@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { FIREBASE_AUTH, FIREBASE_DB } from '../../../firebaseConfig';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
-import { addDoc, collection, doc } from 'firebase/firestore';
+import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 
 
 function PasswordEnter({ email }){
@@ -12,7 +12,6 @@ function PasswordEnter({ email }){
     const auth = FIREBASE_AUTH;
     const navigation = useNavigation();
 
-    console.log(email);
 
     const signIn = async () => {
         if(password != ""){
@@ -21,6 +20,7 @@ function PasswordEnter({ email }){
                 const response = await signInWithEmailAndPassword(auth, email, password);
                 console.log(response);
                 
+                console.log(response.user.displayName);
                 navigation.navigate('Tabs');
 
             } catch (error){
@@ -38,14 +38,18 @@ function PasswordEnter({ email }){
             try{
                 const response = await createUserWithEmailAndPassword(auth, email, password);
                 const user = response.user;
-                const addUser = await addDoc(collection(FIREBASE_DB, "users", user.uid), {
-                    userName: user.displayName, 
+                const userCollection = collection(FIREBASE_DB, "users");
+                const userDocRef = doc(userCollection, user.uid);
+                const data = {
+                    userName: user.email.substring(0, user.email.indexOf(".")) + " " + 
+                    user.email.substring(user.email.indexOf(".") + 1, user.email.indexOf("@")), 
                     imagePath: "",
                     title: "",
                     type: "",
                     ratings: "",
                     price: "",
-                });
+                };
+                const addUser = await setDoc(userDocRef, data);
                 console.log(addUser);
                 signIn();
             } catch(error){

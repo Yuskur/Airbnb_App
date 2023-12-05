@@ -2,7 +2,7 @@ import { View, Text, Button, TouchableOpacity, StyleSheet, TextInput, Image } fr
 import React, { useState, useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { FIREBASE_AUTH, FIREBASE_DB } from '../../../firebaseConfig';
-import { addDoc, collection, doc, getDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, onSnapshot } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 
 function Authentication(){
@@ -18,34 +18,42 @@ function Authentication(){
     };
 
     function clickOn(){
-        setEdit(true)
+        setEdit(true);
     }
     function clickOff(){
-        setEdit(false)
+        setEdit(false);
     }
-
-
+    function logOut(){
+        FIREBASE_AUTH.signOut();
+    }
 
     useEffect(() => {
         const auth = FIREBASE_AUTH;
 
-        const check = onAuthStateChanged(auth, (user) => {
+        const check = onAuthStateChanged(auth, async (user) => {
             setUser(user);
             if(user == null){
                 setName("Name Place holder");
                 setEmail("email")
                 setDate("since")
             } else{
-                const document = doc(FIREBASE_DB, "users", user.uid);
-                const docSnapshot = async () =>{
-                    const snapshot = await getDoc(document);
-                    
-                    if(snapshot.exists){
-                        setName(snapshot.displayName)
-                    }
-                }
                 setEmail(user.email);
                 setDate(user.metadata.creationTime);
+
+                try{
+                    const userCollection = collection(FIREBASE_DB, "users");
+                    const userDoc = doc(userCollection, user.uid);
+
+                    const docSnapshot = await getDoc(userDoc);
+
+                    if(docSnapshot.exists()){
+                        console.log("Found!");
+                        const userName = docSnapshot.data().userName;
+                        setName(userName);
+                    }
+                } catch(error){
+                    console.error("Error fetching user document:", error.message);
+                }   
             }
         });
 
@@ -69,7 +77,7 @@ function Authentication(){
                         <View style={styles.profilePicture}>
                             <Image 
                                 source={require('../../../assets/default_profile_pic.jpeg')}
-                                style={{width: '100%', height: '100%'}}
+                                style={{width: '100%', height: '100%', borderRadius: 60}}
                             />
                         </View>
                             {edit ? (
@@ -127,8 +135,12 @@ function Authentication(){
                                 alignSelf: 'center',
                                 marginTop: 10,
                                 fontWeight: 'bold'
-                            }}>{startDate}</Text>
+                            }}>Since {startDate}</Text>
                         </View>
+
+                        <TouchableOpacity onPress={logOut} style={{marginTop: 30}}>
+                            <Text style={{fontWeight: 'bold', fontSize: 15}}>Log out</Text>
+                        </TouchableOpacity>
                     </View>
                 </>
             ) : (
