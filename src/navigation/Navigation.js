@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -32,11 +32,46 @@ export default function Navigation(){
       function MyTabs(){
         return (
           <Tab.Navigator initialRouteName='Profile'>
-          <Tab.Screen name="Explore" component={Explore} />
-          <Tab.Screen name="Wishlists" component={Wishlists} />
-          <Tab.Screen name="Trips" component={Trips} />
-          <Tab.Screen name="Inbox" component={Inbox} />
-          <Tab.Screen name="Profile" component={Profile} />
+          <Tab.Screen name="Explore" component={Explore} options={{
+            tabBarIcon: ({tintColor}) => (
+              <Image 
+                source={require('../../assets/searchIcon.png')}
+                style={{width: 30, height: 30, tintColor: tintColor}}
+              />
+            )
+          }}/>
+          <Tab.Screen name="Wishlists" component={Wishlists} options={{
+            tabBarIcon: ({tintColor}) => (
+              <Image 
+                source={require('../../assets/heartIcon.png')}
+                style={{width: 20, height: 20, tintColor: tintColor}}
+              />
+            )
+          }}/>
+          <Tab.Screen name="Trips" component={Trips} options={{
+            tabBarIcon: ({tintColor}) => (
+              <Image 
+                source={require('../../assets/airbnb.png')}
+                style={{width: 20, height: 20, tintColor: tintColor}}
+              />
+            )
+          }}/>
+          <Tab.Screen name="Inbox" component={Inbox} options={{
+            tabBarIcon: ({tintColor}) => (
+              <Image 
+                source={require('../../assets/speechBubbleIcon.png')}
+                style={{width: 20, height: 20, tintColor: tintColor}}
+              />
+            )
+          }}/>
+          <Tab.Screen name="Profile" component={Profile} options={{
+            tabBarIcon: ({tintColor}) => (
+              <Image 
+                source={require('../../assets/profileIcon.jpeg')}
+                style={{width: 20, height: 20, tintColor: tintColor}}
+              />
+            )
+          }}/>
         </Tab.Navigator>
         );
       }

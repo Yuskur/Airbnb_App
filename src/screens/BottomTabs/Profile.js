@@ -34,8 +34,8 @@ function Authentication(){
             setUser(user);
             if(user == null){
                 setName("Name Place holder");
-                setEmail("email")
-                setDate("since")
+                setEmail("email");
+                setDate("since");
             } else{
                 setEmail(user.email);
                 setDate(user.metadata.creationTime);

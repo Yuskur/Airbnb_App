@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Image, TextInput, KeyboardAvoidingView, ScrollView, TouchableOpacity} from 'react-native'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { useNavigation } from '@react-navigation/native';
 
 function SearchBar(){
@@ -13,6 +13,7 @@ function SearchBar(){
                     source={require('../../../assets/searchIcon.png')}
                     style={styles.searchBarImage}
                 />
+                <Image />
                 <TextInput 
                     style={styles.input}
                     placeholder='Search'
@@ -21,7 +22,10 @@ function SearchBar(){
                 </View>
                 <View style={styles.circle}>
                     {/* Add some kind of image here: */}
-                    
+                    <Image 
+                        style={{width: '100%', height: '100%', borderRadius: 30}}
+                        source={require('../../../assets/filterIcon.png')}
+                    />
                 </View>
         </View>
     );
@@ -30,6 +34,7 @@ function SearchBar(){
 function Resort({imagePath, title, type, ratings, price}){
 
     const navigation = useNavigation();
+    const [hearted, setHearted] = useState(false)
 
     function imageClick(){
         navigation.navigate('Resort', {
@@ -41,6 +46,14 @@ function Resort({imagePath, title, type, ratings, price}){
         });
     };
 
+    function heart(){
+        if(hearted){
+            setHearted(false);
+        }else {
+            setHearted(true);
+        }
+    };
+
 
     return( 
         <View style={styles.resortContainer}>
@@ -49,8 +62,26 @@ function Resort({imagePath, title, type, ratings, price}){
                 source={imagePath}
                 style={styles.resortImage}
             />
-        <Image />
         </TouchableOpacity>
+        <View style={styles.heartImage}>
+        {hearted ? (
+            <>
+            <TouchableOpacity onPress={heart}>
+                <Image 
+                source={require('../../../assets/heartedIcon.png')}
+                style={{height: 20, width: 20}}/>
+            </TouchableOpacity>
+            </>
+        ) : (
+            <>
+            <TouchableOpacity onPress={heart}>
+                <Image 
+                source={require('../../../assets/heartIcon.png')}
+                style={{height: 20, width: 20}}/>
+            </TouchableOpacity>
+            </>
+        )}
+        </View>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <TouchableOpacity onPress={imageClick}>
                 <Text style={styles.resortText}>{title}</Text>
@@ -159,5 +190,12 @@ const styles = StyleSheet.create({
         marginTop: 10,
         fontSize: 15,
         fontWeight: 'bold'
+    },
+    heartImage: {
+        width: 30,
+        height: 30,
+        position: 'absolute',
+        top: 10,
+        right: 10
     }
 });

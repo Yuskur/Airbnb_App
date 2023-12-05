@@ -30,6 +30,10 @@ export default function Resort({ route }){
 
     const [reserved, setReserved] = useState(false);
 
+    useEffect(() => {
+        setReserved(false);
+      }, []);
+
     function addResort(){
         if(!reserved){
             const auth = FIREBASE_AUTH;
@@ -41,7 +45,7 @@ export default function Resort({ route }){
                         _ratings: ratings, 
                         _type: type,
                         _price: price
-                    }
+                    };
                     try{
                         const userCollection = collection(FIREBASE_DB, "users");
                         const userDocRef = doc(userCollection, user.uid);
