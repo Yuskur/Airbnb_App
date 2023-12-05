@@ -56,6 +56,7 @@ function ResortView({ resort }){
 export default function Wishlists(){
 
     const [resorts, setResorts] = useState([]);
+    
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if(user){
@@ -65,7 +66,7 @@ export default function Wishlists(){
                         const resortData = snapshot.docs.map((resorts) =>{
                             return { id: resorts.id, ...resorts.data() };
                         });
-
+                        
                         setResorts(resortData);
                     });
                     return () => subscriber();

@@ -60,7 +60,7 @@ export default function Trips(){
                 try{
                     const resortsCollection = collection(doc(FIREBASE_DB, "users", user.uid), "Resorts");
                     const subscriber = onSnapshot(resortsCollection, (snapshot) => {
-                        const resortData = snapshot.docs.map((resorts) =>{
+                        const resortData = snapshot.docs.map((resorts) => {
                             return { id: resorts.id, ...resorts.data() };
                         });
 

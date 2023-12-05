@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { FIREBASE_AUTH, FIREBASE_DB } from '../../../firebaseConfig';
 import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -29,39 +29,47 @@ export default function Resort({ route }){
     const { imagePath, title, ratings, type, price } = route.params;
 
     const [reserved, setReserved] = useState(false);
+    const [user, setUser] = useState(false);
+    const auth = FIREBASE_AUTH;
 
     useEffect(() => {
         setReserved(false);
       }, []);
 
-    function addResort(){
-        if(!reserved){
-            const auth = FIREBASE_AUTH;
-            const unsubscribe = onAuthStateChanged(auth, async (user) => {
-                if (user) {
-                    data ={
-                        _imagePath: imagePath,
-                        _title: title,
-                        _ratings: ratings, 
-                        _type: type,
-                        _price: price
-                    };
-                    try{
-                        const userCollection = collection(FIREBASE_DB, "users");
-                        const userDocRef = doc(userCollection, user.uid);
-                        const userResorts = collection(userDocRef, "Resorts");
-                        await addDoc(userResorts, data);
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+        if(user){
+            setUser(user);
+        } 
+        else {
+            setUser(user);
+            setReserved(false);
+        }
+    });
 
-                        setReserved(true);
-                        console.log("Success!")
-                    } catch(error){
-                        console.log("Could not add reservation" + error.message);
-                    }
-                } else {
-                    // No user is signed in.
-                    console.log("No user signed in");
-                }
-            });
+    async function addResort(){
+        if(user && reserved){
+            data ={
+                _imagePath: imagePath,
+                _title: title,
+                _ratings: ratings, 
+                _type: type,
+                _price: price
+            };
+            try{
+                const userCollection = collection(FIREBASE_DB, "users");
+                const userDocRef = doc(userCollection, user.uid);
+                const userResorts = collection(userDocRef, "Resorts");
+                await addDoc(userResorts, data);
+
+                setReserved(true);
+                console.log("Success!");
+            } catch(error){
+                console.log("Could not add reservation" + error.message);
+            }
+
+        } else{
+            // No user is signed in.
+            console.log("No user signed in");
         }
     }
 
