@@ -39,21 +39,22 @@ function Authentication(){
             } else{
                 setEmail(user.email);
                 setDate(user.metadata.creationTime);
+                setName(user.email.substring(0, user.email.indexOf(".")) + " " + 
+                user.email.substring(user.email.indexOf(".") + 1, user.email.indexOf("@")));
+                // try{
+                //     const userCollection = collection(FIREBASE_DB, "users");
+                //     const userDoc = doc(userCollection, user.uid);
 
-                try{
-                    const userCollection = collection(FIREBASE_DB, "users");
-                    const userDoc = doc(userCollection, user.uid);
+                //     const docSnapshot = await getDoc(userDoc);
 
-                    const docSnapshot = await getDoc(userDoc);
-
-                    if(docSnapshot.exists()){
-                        console.log("Found!");
-                        const userName = docSnapshot.data().userName;
-                        setName(userName);
-                    }
-                } catch(error){
-                    console.error("Error fetching user document:", error.message);
-                }   
+                //     if(docSnapshot.exists()){
+                //         console.log("Found!");
+                //         const userName = docSnapshot.data().userName;
+                //         setName(userName);
+                //     }
+                // } catch(error){
+                //     console.error("Error fetching user document:", error.message);
+                // }   
             }
         });
 

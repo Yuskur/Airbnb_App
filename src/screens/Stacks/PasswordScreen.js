@@ -40,16 +40,8 @@ function PasswordEnter({ email }){
                 const user = response.user;
                 const userCollection = collection(FIREBASE_DB, "users");
                 const userDocRef = doc(userCollection, user.uid);
-                const data = {
-                    userName: user.email.substring(0, user.email.indexOf(".")) + " " + 
-                    user.email.substring(user.email.indexOf(".") + 1, user.email.indexOf("@")), 
-                    imagePath: "",
-                    title: "",
-                    type: "",
-                    ratings: "",
-                    price: "",
-                };
-                const addUser = await setDoc(userDocRef, data);
+                const addUser = await setDoc(userDocRef, {});
+
                 console.log(addUser);
                 signIn();
             } catch(error){

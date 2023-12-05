@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Image, TextInput, KeyboardAvoidingView, ScrollView, TouchableOpacity} from 'react-native'
-import React from 'react'
+import React, {useState} from 'react'
 import { useNavigation } from '@react-navigation/native';
 
 function SearchBar(){
@@ -67,6 +67,7 @@ function Resort({imagePath, title, type, ratings, price}){
 }
 
 export default function Explore(){
+
     return(
         <View>
             <ScrollView style={styles.container}>

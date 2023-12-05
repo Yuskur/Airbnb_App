@@ -1,5 +1,8 @@
 import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, {useState} from 'react'
+import { FIREBASE_AUTH, FIREBASE_DB } from '../../../firebaseConfig';
+import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
 
 function ResortScreen({
     imagePath, title, ratings, type, price
@@ -25,6 +28,39 @@ export default function Resort({ route }){
 
     const { imagePath, title, ratings, type, price } = route.params;
 
+    const [reserved, setReserved] = useState(false);
+
+    function addResort(){
+        if(!reserved){
+            const auth = FIREBASE_AUTH;
+            const unsubscribe = onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    data ={
+                        _imagePath: imagePath,
+                        _title: title,
+                        _ratings: ratings, 
+                        _type: type,
+                        _price: price
+                    }
+                    try{
+                        const userCollection = collection(FIREBASE_DB, "users");
+                        const userDocRef = doc(userCollection, user.uid);
+                        const userResorts = collection(userDocRef, "Resorts");
+                        await addDoc(userResorts, data);
+
+                        setReserved(true);
+                        console.log("Success!")
+                    } catch(error){
+                        console.log("Could not add reservation" + error.message);
+                    }
+                } else {
+                    // No user is signed in.
+                    console.log("No user signed in");
+                }
+            });
+        }
+    }
+
     return(
         <View style={{flex: 1}}>
             <ScrollView>
@@ -47,7 +83,7 @@ export default function Resort({ route }){
                     }}>{price}</Text>
                     <Text style={{fontSize: 15}}> night</Text>
                 </View>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={addResort}>
                     <Text style={{
                         color: '#FFF', 
                         fontSize: 17,
