@@ -26,10 +26,14 @@ function Resort({imagePath, title, type, ratings, price}){
                 source={imagePath}
                 style={styles.resortImage}
             />
-            <Image />
             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                 <Text style={styles.resortText}>{title}</Text>
-                <Text style={styles.resortText}>{ratings}</Text>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>   
+                    <Image source={require('../../../assets/blackStarIcon.png')}
+                        style={{width: 20, height: 20, marginTop: 10}}
+                    />
+                    <Text style={styles.resortText}>{ratings}</Text>
+                </View>
             </View>
             <Text>{type}</Text>
             <View style={{flexDirection: 'row'}}>

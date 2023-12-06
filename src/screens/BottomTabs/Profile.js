@@ -41,20 +41,6 @@ function Authentication(){
                 setDate(user.metadata.creationTime);
                 setName(user.email.substring(0, user.email.indexOf(".")) + " " + 
                 user.email.substring(user.email.indexOf(".") + 1, user.email.indexOf("@")));
-                // try{
-                //     const userCollection = collection(FIREBASE_DB, "users");
-                //     const userDoc = doc(userCollection, user.uid);
-
-                //     const docSnapshot = await getDoc(userDoc);
-
-                //     if(docSnapshot.exists()){
-                //         console.log("Found!");
-                //         const userName = docSnapshot.data().userName;
-                //         setName(userName);
-                //     }
-                // } catch(error){
-                //     console.error("Error fetching user document:", error.message);
-                // }   
             }
         });
 
@@ -63,7 +49,12 @@ function Authentication(){
     }, []);
 
     return(
-        <View style={{flex: 1, marginHorizontal: 20}}>
+        <View style={{flex: 1, marginHorizontal: 20, marginTop: 100}}>
+            <View style={{marginBottom: 10, justifyContent: 'space-between', flexDirection: 'row'}}>
+                <Text style={{fontWeight: '900', fontSize: 30}}>Profile</Text>
+                <Image source={require('../../../assets/bellIcon.png')}
+                        style={{width: 30, height: 30}} />
+            </View>
             {user ? (
                 <>
                 <View style={{
@@ -73,7 +64,8 @@ function Authentication(){
                             height: 300,
                             borderColor: 'black',
                             borderWidth: 1,
-                            borderRadius: 20
+                            borderRadius: 20, 
+                            backgroundColor: '#fff'
                         }}>
                         <View style={styles.profilePicture}>
                             <Image 

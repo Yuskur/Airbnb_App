@@ -7,7 +7,7 @@ function SearchBar(){
         <View style={{
             flexDirection: 'row', 
             justifyContent: 'space-between',
-            marginBottom: 20}}>
+            marginBottom: 20, marginTop: 10}}>
             <View style={styles.searchBarContainer}>
                 <Image 
                     source={require('../../../assets/searchIcon.png')}
@@ -86,7 +86,12 @@ function Resort({imagePath, title, type, ratings, price}){
             <TouchableOpacity onPress={imageClick}>
                 <Text style={styles.resortText}>{title}</Text>
             </TouchableOpacity>
-            <Text style={styles.resortText}>{ratings}</Text>
+            <View style={{flexDirection: 'row'}}>  
+                <Image source={require('../../../assets/blackStarIcon.png')} 
+                    style={{width: 20, height: 20, marginTop: 10, alignSelf: 'center'}}
+                />
+                <Text style={styles.resortText}>{ratings}</Text>
+            </View> 
         </View>
         <Text>{type}</Text>
         <View style={{flexDirection: 'row'}}>

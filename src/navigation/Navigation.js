@@ -70,7 +70,7 @@ export default function Navigation(){
                 source={require('../../assets/profileIcon.jpeg')}
                 style={{width: 20, height: 20, tintColor: tintColor}}
               />
-            )
+            ), headerShown: false
           }}/>
         </Tab.Navigator>
         );

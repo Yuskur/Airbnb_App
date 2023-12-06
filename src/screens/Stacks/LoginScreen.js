@@ -1,4 +1,4 @@
-import { View, Text, KeyboardAvoidingView, TextInput, StyleSheet, ActivityIndicator, Button, TouchableOpacity } from 'react-native'
+import { View, Text, KeyboardAvoidingView, TextInput, StyleSheet, ActivityIndicator, Button, TouchableOpacity, Image } from 'react-native'
 import React, {useState} from 'react'
 import { useNavigation } from '@react-navigation/native';
 
@@ -41,15 +41,31 @@ function Login(){
             </View>
             <View>
             <TouchableOpacity style={styles.orButtons}>
+            <Image 
+                source={require('../../../assets/phoneIcon.jpeg')}
+                style={{marginRight: 80, width: 20, height: 20}}
+            />
                 <Text style={styles.orText}>Continue with Phone</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.orButtons}>
+                <Image 
+                    source={require('../../../assets/appleIcon.png')}
+                    style={{marginRight: 80, width: 20, height: 20}}
+                />
                 <Text style={styles.orText}>Continue with Apple</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.orButtons}>
+                <Image 
+                    source={require('../../../assets/googleIcon.png')}
+                    style={{marginRight: 80, width: 20, height: 20}}
+                />
                 <Text style={styles.orText}>Continue with Google</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.orButtons}>
+                <Image 
+                    source={require('../../../assets/facebookIcon.png')}
+                    style={{marginRight: 80, width: 20, height: 20}}
+                />
                 <Text style={styles.orText}>Continue with Facebook</Text>
             </TouchableOpacity>
             </View>
@@ -96,14 +112,15 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     }, 
     orButtons: {
+        flexDirection: 'row',
         marginTop: 20,
         backgroundColor: 'transparent',
         padding: 15,
-        alignItems: 'center',
         borderRadius: 10,
         borderWidth: 2,
         borderStyle: 'solid',
-        borderColor: 'black'
+        borderColor: 'black', 
+        
     },
     orText: {
         color: 'black',
