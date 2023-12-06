@@ -4,29 +4,72 @@ import { useNavigation } from '@react-navigation/native';
 
 function SearchBar(){
     return(
-        <View style={{
-            flexDirection: 'row', 
-            justifyContent: 'space-between',
-            marginBottom: 20, marginTop: 10}}>
-            <View style={styles.searchBarContainer}>
-                <Image 
-                    source={require('../../../assets/searchIcon.png')}
-                    style={styles.searchBarImage}
-                />
-                <Image />
-                <TextInput 
-                    style={styles.input}
-                    placeholder='Search'
-                    placeholderTextColor='black'
-                />
-                </View>
-                <View style={styles.circle}>
-                    {/* Add some kind of image here: */}
+        <View>
+            <View style={{
+                flexDirection: 'row', 
+                justifyContent: 'space-between',
+                marginBottom: 20, marginTop: 10}}>
+                <View style={styles.searchBarContainer}>
+                    <Image 
+                        source={require('../../../assets/searchIcon.png')}
+                        style={styles.searchBarImage}
+                    />
+                    <Image />
+                    <TextInput 
+                        style={styles.input}
+                        placeholder='Search'
+                        placeholderTextColor='black'
+                    />
+                    </View>
+                    <View style={styles.circle}>
                     <Image 
                         style={{width: '100%', height: '100%', borderRadius: 30}}
                         source={require('../../../assets/filterIcon.png')}
                     />
                 </View>
+            </View>
+            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <TouchableOpacity>
+                    <View>
+                        <Image source={require('../../../assets/cabinsIcon.png')}
+                            style={{width: 40, height: 40}}
+                        />
+                        <Text style={{alignSelf: 'center'}}>Cabins</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <View>
+                        <Image source={require('../../../assets/trendingIcon.png')}
+                            style={{width: 40, height: 40}}
+                        />
+                        <Text style={{alignSelf: 'center'}}>Trending</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <View>
+                        <Image source={require('../../../assets/gameControllerIcon.png')}
+                            style={{width: 40, height: 40}}
+                        />
+                        <Text style={{alignSelf: 'center'}}>Play</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <View>
+                        <Image source={require('../../../assets/cityIcon.png')}
+                            style={{width: 40, height: 40}}
+                        />
+                        <Text style={{alignSelf: 'center'}}>City</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <View>
+                        <Image source={require('../../../assets/beachIcon.png')}
+                            style={{width: 40, height: 40}}
+                        />
+                        <Text style={{alignSelf: 'center'}}>Beach</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
