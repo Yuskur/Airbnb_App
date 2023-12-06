@@ -82,10 +82,13 @@ function PasswordEnter({ email }){
                         <TouchableOpacity onPress={signUp} style={styles.button}>
                             <Text style={styles.buttonText}>Sign Up</Text>
                         </TouchableOpacity>
-                        <Text style={{ fontWeight: 'bold'}}>
-                            ------------------------------ or 
-                            ------------------------------
-                        </Text>
+                        <View style={styles.secondContainer}>
+                            <View style={{flex: 1, borderWidth: .5, borderColor: 'grey', margin: 10}}/>
+                                <Text style={styles.text}>
+                                    or 
+                                </Text>
+                            <View style={{flex: 1, borderWidth: .5, borderColor: 'grey', margin: 10}}/>
+                        </View>
                         <TouchableOpacity onPress={signIn} style={styles.button}>
                             <Text style={styles.buttonText}>Sign In</Text>
                         </TouchableOpacity>
@@ -134,5 +137,8 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         padding: 10,
         backgroundColor: "#fff",
+    },
+    secondContainer: {
+        flexDirection: 'row'
     },
   });

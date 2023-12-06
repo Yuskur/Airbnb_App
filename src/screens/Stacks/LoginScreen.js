@@ -21,7 +21,7 @@ function Login(){
     return (
         <View style={styles.container}>
             <KeyboardAvoidingView behavior='padding'>
-            <View style={styles.secondContainer}>
+            <View style={{marginTop: 40}}>
             <TextInput  
                     style={styles.input}
                     placeholder='Email'
@@ -34,10 +34,11 @@ function Login(){
             </TouchableOpacity>
             </KeyboardAvoidingView>
             <View style={styles.secondContainer}>
+                <View style={{flex: 1, borderWidth: .5, borderColor: 'grey', margin: 10}}/>
                 <Text style={styles.text}>
-                    ------------------------------ or 
-                    ------------------------------
+                     or 
                 </Text>
+                <View style={{flex: 1, borderWidth: .5, borderColor: 'grey', margin: 10}}/>
             </View>
             <View>
             <TouchableOpacity style={styles.orButtons}>
@@ -94,7 +95,8 @@ const styles = StyleSheet.create({
       backgroundColor: "#fff",
     },
     secondContainer: {
-        marginTop: 40
+        marginTop: 40,
+        flexDirection: 'row'
     },  
     button: {
         marginTop: 20,
