@@ -18,7 +18,7 @@ The following extensions are implemented
 
 ## Video walkthrough
 
-//Video walkthrough here
+![AirbnbApp](https://github.com/Yuskur/Airbnb_App/assets/123311946/e8600136-de9f-4003-9345-d06c7fc0506c)
 
 ## Notes
 * One of the things I found challenging was the tabs navigator (required some research)
