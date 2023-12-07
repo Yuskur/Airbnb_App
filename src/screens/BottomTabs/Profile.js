@@ -38,7 +38,7 @@ function Authentication(){
                 setDate("since");
             } else{
                 setEmail(user.email);
-                setDate(user.metadata.creationTime);
+                setDate(user.metadata.creationTime.substring(0, 16));
                 setName(user.email.substring(0, user.email.indexOf(".")) + " " + 
                 user.email.substring(user.email.indexOf(".") + 1, user.email.indexOf("@")));
             }
