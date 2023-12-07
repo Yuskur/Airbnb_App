@@ -22,10 +22,32 @@ function Resort({imagePath, title, type, ratings, price}){
 
     return( 
         <View style={styles.resortContainer}>
-            <Image 
-                source={imagePath}
-                style={styles.resortImage}
-            />
+            <Text style={{
+                fontWeight: '900', 
+                alignSelf: 'center',
+                fontSize: 15,
+                marginBottom: 10}}>trips</Text>
+            <Text style={{fontWeight: 'bold', fontSize: 24, marginBottom: 30}}>
+                Upcoming Reservations
+            </Text>
+            <View>
+                <Image 
+                    source={imagePath}
+                    style={styles.resortImage}
+                />
+                <View style={{
+                    flex: 1, 
+                    height: 30,
+                    position: 'absolute',
+                    top: 20,
+                    left: 10,
+                    backgroundColor: '#fff',
+                    borderRadius: 5}}>
+                        <Text style={{fontWeight: 'bold', fontSize: 15, margin: 5}}>
+                            In 2 days
+                        </Text>
+                    </View>
+            </View>
             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                 <Text style={styles.resortText}>{title}</Text>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>   
@@ -94,7 +116,7 @@ export default function Trips(){
 
 const styles = StyleSheet.create({
     resortContainer: {
-        marginTop: 30,
+        marginTop: 100,
         marginBottom: 20,
         marginHorizontal: 25
     },  

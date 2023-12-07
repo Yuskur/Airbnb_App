@@ -23,7 +23,7 @@ export default function Navigation(){
             <Stack.Screen name="Tabs" component={MyTabs} 
             options={{headerShown: false}} />
             <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: true}} />
-            <Stack.Screen name="Resort" component={Resort} options={{ headerShown: true}} />
+            <Stack.Screen name="Resort" component={Resort} options={{ headerShown: false}} />
             <Stack.Screen name="PasswordScreen" component={PasswordScreen} options={{ headerShown: true}}/>
             <Stack.Screen name="Profile" component={Profile} options={{ headerShown: true}} />
           </Stack.Navigator>
@@ -38,7 +38,7 @@ export default function Navigation(){
                 source={require('../../assets/searchIcon.png')}
                 style={{width: 30, height: 30, tintColor: tintColor}}
               />
-            )
+            ), headerShown: false
           }}/>
           <Tab.Screen name="Wishlists" component={Wishlists} options={{
             tabBarIcon: ({tintColor}) => (
@@ -54,7 +54,7 @@ export default function Navigation(){
                 source={require('../../assets/airbnb.png')}
                 style={{width: 20, height: 20, tintColor: tintColor}}
               />
-            )
+            ), headerShown: false
           }}/>
           <Tab.Screen name="Inbox" component={Inbox} options={{
             tabBarIcon: ({tintColor}) => (

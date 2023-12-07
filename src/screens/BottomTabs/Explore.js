@@ -8,7 +8,7 @@ function SearchBar(){
             <View style={{
                 flexDirection: 'row', 
                 justifyContent: 'space-between',
-                marginBottom: 20, marginTop: 10}}>
+                marginBottom: 20, marginTop: 100}}>
                 <View style={styles.searchBarContainer}>
                     <Image 
                         source={require('../../../assets/searchIcon.png')}

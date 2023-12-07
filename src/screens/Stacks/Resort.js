@@ -8,12 +8,71 @@ import { useNavigation } from '@react-navigation/native';
 function ResortScreen({
     imagePath, title, ratings, type, price
 }){
+    const navigation = useNavigation();
+
+    function navigate(){
+        navigation.navigate('Tabs', {screen: 'Explore'});
+    };
+
     return(
         <View>
+            <View>
             <Image 
                 source={imagePath}
                 style={styles.resortImage}
             />
+            <View style={{
+                width: 50,
+                height: 50,
+                 borderRadius: 25, 
+                 borderWidth: 1, 
+                 borderColor: 'black',
+                 position: 'absolute',
+                 top: 40, 
+                 left: 20, 
+                 backgroundColor: '#fff', 
+                 justifyContent: 'center', 
+                 alignItems: 'center'}}>
+                    <TouchableOpacity onPress={navigate}>
+                        <Image source={require('../../../assets/backArrowIcon.png')}
+                        style={{width: 30, height: 30, borderRadius: 15}} />
+                    </TouchableOpacity>
+                 </View>
+                 <View style={{
+                width: 50,
+                height: 50,
+                 borderRadius: 25, 
+                 borderWidth: 1, 
+                 borderColor: 'black',
+                 position: 'absolute',
+                 top: 40, 
+                 right: 100,
+                 backgroundColor: '#fff', 
+                 justifyContent: 'center', 
+                 alignItems: 'center'}}>
+                 <TouchableOpacity>
+                    <Image source={require('../../../assets/shareIcon.png')}
+                    style={{width: 30, height: 30, borderRadius: 15}} />
+                 </TouchableOpacity>
+                 </View>
+                 <View style={{
+                width: 50,
+                height: 50,
+                 borderRadius: 25, 
+                 borderWidth: 1, 
+                 borderColor: 'black',
+                 position: 'absolute',
+                 top: 40, 
+                 right: 20,
+                 backgroundColor: '#fff', 
+                 justifyContent: 'center', 
+                 alignItems: 'center'}}>
+                 <TouchableOpacity>
+                    <Image source={require('../../../assets/heartIcon.png')}
+                    style={{width: 25, height: 25, borderRadius: 12.5}} />
+                 </TouchableOpacity>
+                 </View>
+            </View>
             <Text style={{
                 fontWeight: 'bold',
                 fontSize: 24,
